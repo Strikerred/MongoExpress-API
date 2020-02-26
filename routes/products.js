@@ -5,6 +5,19 @@ var config = require("../config")
 
 var db= mongojs(config.database_cloud, ['products'])
 
+/**
+ * @swagger
+ * /api/products:
+ *   get:
+ *     tags:
+ *       - products
+ *     description: Returns all products
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: A JSON of products
+ */
 router.get("/products", function(req, res, next) {
     // res.send("STUDENTS API");
     db.products.find((err, data) => {
@@ -14,7 +27,26 @@ router.get("/products", function(req, res, next) {
         res.json(data)
     })
 });
-    // get single student
+
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   get:
+ *     tags:
+ *       - product
+ *     description: Returns products by id
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - id: id
+ *         description: Products's id
+ *         in: path
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: A JSON of product
+ */
 router.get("/products/:id", (req, res, next) => {
     db.products.findOne({_id: mongojs.ObjectId(req.params.id)},function(err, data){
         if (err) {
@@ -24,7 +56,20 @@ router.get("/products/:id", (req, res, next) => {
         });
     });
 
-// create student
+
+/**
+ * @swagger
+ * /api/products/id:
+ *   post:
+ *     tags:
+ *       - product
+ *     description: create a  product
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Create a product
+ */
 router.post("/products", (req, res, next) => {
     var product = req.body;
 
@@ -47,7 +92,20 @@ router.post("/products", (req, res, next) => {
         })
     }
 });
-// delete student
+
+/**
+ * @swagger
+ * /api/products/id:
+ *   delete:
+ *     tags:
+ *       - product
+ *     description: delete a  product
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: delete a product
+ */
 router.delete("/products/:id", (req, res, next) => {
     db.products.remove({_id: mongojs.ObjectId(req.params.id)},function(err, data){
         if (err) {
