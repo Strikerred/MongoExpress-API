@@ -33,7 +33,7 @@ var swaggerDefinition = {
         version: '1.0.0',
     },
     host: 'secure-crag-01280.herokuapp.com',
-    basePath: '/',
+    basePath: '/' ,
 };
 var options = {
     // import swaggerDefinitions
