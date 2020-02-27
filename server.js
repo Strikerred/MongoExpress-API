@@ -67,7 +67,7 @@ app.use(express.static(path.join(__dirname, "api-docs")));
 
 //app.use("/", index);
 //app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs)) //Sebastian
-app.use("/api", products);
+app.use(swaggerDefinition.basePath, products);
 
 app.listen(config.port, function() {
     console.log("Server started on port " + config.port)
