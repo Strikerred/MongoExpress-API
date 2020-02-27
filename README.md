@@ -1,6 +1,6 @@
 # MongoExpress-API
 
-# To check deploy API please visit these links belows:
+# To check deployed API please visit these links belows:
 
 ## https://secure-crag-01280.herokuapp.com/
 ## https://secure-crag-01280.herokuapp.com/swagger.json
