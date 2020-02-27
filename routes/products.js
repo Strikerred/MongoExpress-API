@@ -12,10 +12,13 @@ var db= mongojs(config.database_cloud, ['products'])
  *     properties:
  *       product:
  *         type: string
+ *         example: Computer
  *       category:
  *         type: string
+ *         example: Electronics
  *       price:
  *         type: integer
+ *         example: 350
  */
 
 /**
