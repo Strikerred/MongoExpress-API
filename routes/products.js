@@ -7,6 +7,19 @@ var db= mongojs(config.database_cloud, ['products'])
 
 /**
  * @swagger
+ * definitions:
+ *   Product:
+ *     properties:
+ *       product:
+ *         type: string
+ *       category:
+ *         type: string
+ *       price:
+ *         type: integer
+ */
+
+/**
+ * @swagger
  * /api/products:
  *   get:
  *     tags:
@@ -17,6 +30,8 @@ var db= mongojs(config.database_cloud, ['products'])
  *     responses:
  *       200:
  *         description: A JSON of products
+ *         schema:
+ *         $ref: '#/definitions/Product'
  */
 router.get("/products", function(req, res, next) {
     // res.send("STUDENTS API");
@@ -30,22 +45,24 @@ router.get("/products", function(req, res, next) {
 
 /**
  * @swagger
- * /api/products/{id}:
+ * /api/products/{productId}:
  *   get:
  *     tags:
- *       - product
- *     description: Returns products by id
+ *       - products
+ *     description: Returns a single product
  *     produces:
  *       - application/json
  *     parameters:
- *       - id: id
- *         description: Products's id
+ *       - name: productId
+ *         description: Product's id
  *         in: path
  *         required: true
- *         type: integer
+ *         type: string
  *     responses:
  *       200:
- *         description: A JSON of product
+ *         description: A single product
+ *         schema:
+ *           $ref: '#/definitions/Product'
  */
 router.get("/products/:id", (req, res, next) => {
     db.products.findOne({_id: mongojs.ObjectId(req.params.id)},function(err, data){
@@ -56,19 +73,25 @@ router.get("/products/:id", (req, res, next) => {
         });
     });
 
-
 /**
  * @swagger
- * /api/products/id:
+ * /api/products:
  *   post:
  *     tags:
- *       - product
- *     description: create a  product
+ *       - products
+ *     description: Creates a new product
  *     produces:
  *       - application/json
+ *     parameters:
+ *       - name: product
+ *         description: product object
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/Product'
  *     responses:
  *       200:
- *         description: Create a product
+ *         description: Successfully created
  */
 router.post("/products", (req, res, next) => {
     var product = req.body;
@@ -95,16 +118,22 @@ router.post("/products", (req, res, next) => {
 
 /**
  * @swagger
- * /api/products/id:
+ * /api/products/{productId}:
  *   delete:
  *     tags:
- *       - product
- *     description: delete a  product
+ *       - products
+ *     description: Deletes a single product
  *     produces:
  *       - application/json
+ *     parameters:
+ *       - name: productId
+ *         description: product's id
+ *         in: path
+ *         required: true
+ *         type: string
  *     responses:
  *       200:
- *         description: delete a product
+ *         description: Successfully deleted
  */
 router.delete("/products/:id", (req, res, next) => {
     db.products.remove({_id: mongojs.ObjectId(req.params.id)},function(err, data){
@@ -115,7 +144,30 @@ router.delete("/products/:id", (req, res, next) => {
     });
 });
 
-// update student
+/**
+ * @swagger
+ * /api/products/{productId}:
+ *   put:
+ *     tags: 
+ *       - products
+ *     description: Updates a single product
+ *     produces: application/json
+ *     parameters:
+ *       - name: productId
+ *         in: path
+ *         description: Id of the product to return
+ *         require: true
+ *         type: string
+ *       - name: body
+ *         in: body
+ *         description: Fields for the Product resource
+ *         require: true
+ *         schema:
+ *           $ref: '#/definitions/Product'
+ *     responses:
+ *       200:
+ *         description: Successfully updated
+ */
 router.put("/products/:id", (req, res, next) => {
     var product = req.body;
     var changedProduct = {};
