@@ -61,7 +61,7 @@ app.get('/swagger.json', function(req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
   });
-app.use(express.static(path.join(__dirname, "routes/api-docs")));
+app.use(express.static(path.join(__dirname, "api-docs")));
 //-----------------------------------------------End of Tutorial
 
 
