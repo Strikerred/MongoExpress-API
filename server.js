@@ -33,7 +33,7 @@ var swaggerDefinition = {
         version: '1.0.0',
     },
     host: 'https://secure-crag-01280.herokuapp.com',
-    basePath: '/api',
+    basePath: '/',
 };
 var options = {
     // import swaggerDefinitions
@@ -67,7 +67,7 @@ app.use(express.static(path.join(__dirname, "api-docs")));
 
 //app.use("/", index);
 //app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs)) //Sebastian
-app.use(swaggerDefinition.basePath, products);
+app.use("/api", products);
 
 app.listen(config.port, function() {
     console.log("Server started on port " + config.port)
