@@ -1,7 +1,6 @@
 var express = require("express")
 var path = require("path")
 var bodyParser = require("body-parser")
-
 var index = require("./routes/index")
 var products = require("./routes/products")
 
@@ -33,7 +32,7 @@ var swaggerDefinition = {
         title: 'Inventory API',
         version: '1.0.0',
     },
-    host: 'localhost:3000',
+    host: 'https://secure-crag-01280.herokuapp.com',
     basePath: '/',
 };
 var options = {
@@ -56,14 +55,17 @@ app.use(function(req, res, next) {
 }); 
 
 
+//-------------------------------------------------Tutorial
 // serve swagger
 app.get('/swagger.json', function(req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
   });
-  
-app.use("/", index);
-//app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs)); //Tutorial
+app.use(express.static(path.join(__dirname, "routes/api-docs")));
+//-----------------------------------------------End of Tutorial
+
+
+//app.use("/", index);
 //app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs)) //Sebastian
 app.use("/api", products);
 
