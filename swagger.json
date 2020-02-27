@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "title": "Products API"
   },
-  "host": "damp-river-99300.herokuapp.com",
+  "host": "secure-crag-01280.herokuapp.com",
   "basePath": "/api",
   "tags": [
     {
