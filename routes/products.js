@@ -99,9 +99,9 @@ router.get("/products/:id", (req, res, next) => {
 router.post("/products", (req, res, next) => {
     var product = req.body;
 
-    if (!product.StartDate) {
-        product.StartDate = new Date();
-    }
+    // if (!product.StartDate) {
+    //     product.StartDate = new Date();
+    // }
 
     if (!product.product || !product.category
         || !product.price)  {
