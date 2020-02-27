@@ -32,7 +32,7 @@ var swaggerDefinition = {
         title: 'Inventory API',
         version: '1.0.0',
     },
-    host: 'https://secure-crag-01280.herokuapp.com',
+    host: 'secure-crag-01280.herokuapp.com',
     basePath: '/',
 };
 var options = {
